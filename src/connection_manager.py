@@ -18,6 +18,7 @@ from src.connections.discord_connection import DiscordConnection
 from src.connections.allora_connection import AlloraConnection
 from src.connections.xai_connection import XAIConnection
 from src.connections.ethereum_connection import EthereumConnection
+from src.connections.bluesky_connection import BlueskyConnection
 from src.connections.together_connection import TogetherAIConnection
 from src.connections.evm_connection import EVMConnection
 from src.connections.perplexity_connection import PerplexityConnection
@@ -76,6 +77,8 @@ class ConnectionManager:
             return PerplexityConnection
         elif class_name == "monad":
             return MonadConnection
+        elif class_name == "bluesky":
+            return BlueskyConnection
         return None
 
     def _register_connection(self, config_dic: Dict[str, Any]) -> None:
