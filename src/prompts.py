@@ -10,6 +10,17 @@ POST_TWEET_PROMPT =  ("Generate an engaging tweet. Don't include any hashtags, l
 
 REPLY_TWEET_PROMPT = ("Generate a friendly, engaging reply to this tweet: {tweet_text}. Keep it under 280 characters. Don't include any usernames, hashtags, links or emojis. ")
 
+#Bluesky prompts
+POST_BLUESKY_PROMPT = (
+    "Generate an engaging bluesky post. Don't include any hashtags, links or emojis. Keep it concise and thoughtful. "
+    "The posts should be pure commentary. "
+    "Avoid repeating any of the example posts."
+)
+
+REPLY_BLUESKY_PROMPT = (
+    "Generate a friendly, engaging reply to this bluesky post: {post_text}. "
+    "Keep it concise and thoughtful. Don't include any usernames, hashtags, links or emojis."
+)
 
 #Echochamber prompts
 REPLY_ECHOCHAMBER_PROMPT = ("Context:\n- Current Message: \"{content}\"\n- Sender Username: @{sender_username}\n- Room Topic: {room_topic}\n- Tags: {tags}\n\n"
