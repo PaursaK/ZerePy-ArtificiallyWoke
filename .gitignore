@@ -18,3 +18,5 @@ agents/*.json
 # macOS
 .DS_Store
 .codegpt
+src/helpers/tweets.json
+src/helpers/parse_tweets.py
