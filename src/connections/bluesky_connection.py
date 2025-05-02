@@ -20,7 +20,8 @@ class BlueskyConnection(BaseConnection):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(config)
         self._client = None  # Placeholder for API client or session
-        
+
+    ### ADDED THIS FUNCTION TO CHECK IF THE CONNECTION IS CONFIGURED  ###
     def is_configured(self, verbose: bool = False) -> bool:
             """Check if the Bluesky connection is configured"""
             try:

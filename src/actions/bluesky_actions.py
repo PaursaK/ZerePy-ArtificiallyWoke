@@ -14,8 +14,8 @@ def post_bluesky(agent, **kwargs):
     else:
         last_post_time = agent.state["last_post_time"]
 
-    post_interval = getattr(agent, "post_interval", 5400)
-    if current_time - last_post_time >= post_interval:
+    post_interval = getattr(agent, "post_interval", 5400) # 90 minutes default interval
+    if current_time - last_post_time >= post_interval: #interval grabbed from agent config
         agent.logger.info("\n📝 GENERATING NEW BLUESKY POST")
         print_h_bar()
 
@@ -37,6 +37,7 @@ def post_bluesky(agent, **kwargs):
         agent.logger.info("\n👀 Delaying post until post interval elapses...")
         return False
 
+### REMOVED FOR BOT SIMPLICITY ###
 
 # @register_action("reply-to-bluesky")
 # def reply_to_bluesky(agent, **kwargs):
