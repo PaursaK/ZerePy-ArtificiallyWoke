@@ -17,10 +17,10 @@ POST_BLUESKY_PROMPT = (
     "Avoid repeating any of the example posts."
 )
 
-REPLY_BLUESKY_PROMPT = (
-    "Generate a friendly, engaging reply to this bluesky post: {post_text}. "
-    "Keep it concise and thoughtful. Don't include any usernames, hashtags, links or emojis."
-)
+# REPLY_BLUESKY_PROMPT = (
+#     "Generate a friendly, engaging reply to this bluesky post: {post_text}. "
+#     "Keep it concise and thoughtful. Don't include any usernames, hashtags, links or emojis."
+# )
 
 #Echochamber prompts
 REPLY_ECHOCHAMBER_PROMPT = ("Context:\n- Current Message: \"{content}\"\n- Sender Username: @{sender_username}\n- Room Topic: {room_topic}\n- Tags: {tags}\n\n"

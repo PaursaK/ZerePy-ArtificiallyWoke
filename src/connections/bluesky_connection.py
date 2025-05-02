@@ -20,6 +20,16 @@ class BlueskyConnection(BaseConnection):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(config)
         self._client = None  # Placeholder for API client or session
+        
+    def is_configured(self, verbose: bool = False) -> bool:
+            """Check if the Bluesky connection is configured"""
+            try:
+                # For simplicity, consider it configured if access token is present
+                return hasattr(self, "_access_jwt") and self._access_jwt is not None
+            except Exception as e:
+                if verbose:
+                    logger.error(f"Error checking Bluesky configuration: {e}")
+                return False
 
     @property
     def is_llm_provider(self) -> bool:
