@@ -22,7 +22,7 @@ class ZerePyAgent:
     ):
         try:
             agent_path = Path("agents") / f"{agent_name}.json"
-            agent_dict = json.load(open(agent_path, "r"))
+            agent_dict = json.load(open(agent_path, "r", encoding="utf-8"))
 
             missing_fields = [field for field in REQUIRED_FIELDS if field not in agent_dict]
             if missing_fields:
@@ -77,11 +77,11 @@ class ZerePyAgent:
         self.model_provider = llm_providers[0]
 
         # Load Twitter username for self-reply detection if Twitter tasks exist
-        if any("tweet" in task["name"] for task in self.tasks):
-            load_dotenv()
-            self.username = os.getenv('TWITTER_USERNAME', '').lower()
-            if not self.username:
-                logger.warning("Twitter username not found, some Twitter functionalities may be limited")
+        # if any("tweet" in task["name"] for task in self.tasks):
+        #     load_dotenv()
+        #     self.username = os.getenv('TWITTER_USERNAME', '').lower()
+        #     if not self.username:
+        #         logger.warning("Twitter username not found, some Twitter functionalities may be limited")
 
     def _construct_system_prompt(self) -> str:
         """Construct the system prompt from agent configuration"""
@@ -98,15 +98,15 @@ class ZerePyAgent:
                 if self.examples:
                     prompt_parts.extend(f"- {example}" for example in self.examples)
 
-                if self.example_accounts:
-                    for example_account in self.example_accounts:
-                        tweets = self.connection_manager.perform_action(
-                            connection_name="twitter",
-                            action_name="get-latest-tweets",
-                            params=[example_account]
-                        )
-                        if tweets:
-                            prompt_parts.extend(f"- {tweet['text']}" for tweet in tweets)
+                # if self.example_accounts:
+                #     for example_account in self.example_accounts:
+                #         tweets = self.connection_manager.perform_action(
+                #             connection_name="twitter",
+                #             action_name="get-latest-tweets",
+                #             params=[example_account]
+                #         )
+                #         if tweets:
+                #             prompt_parts.extend(f"- {tweet['text']}" for tweet in tweets)
 
             self._system_prompt = "\n".join(prompt_parts)
 

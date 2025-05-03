@@ -41,9 +41,13 @@ class ConnectionManager:
             connection_class: The connection class to instantiate
             config: Configuration dictionary for the connection
         """
+
         try:
             name = config_dic["name"]
             connection_class = self._class_name_to_type(name)
+            if connection_class is None:
+                logging.warning(f"Skipping unknown connection type: {name}")
+                return
             connection = connection_class(config_dic)
             self.connections[name] = connection
         except Exception as e:

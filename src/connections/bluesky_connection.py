@@ -62,7 +62,7 @@ class BlueskyConnection(BaseConnection):
             )
         }
 
-    def configure(self):
+    def configure(self) -> bool:
         """Configure the Bluesky API client/session"""
         import requests
         import time
@@ -70,16 +70,16 @@ class BlueskyConnection(BaseConnection):
         logger.info("Configuring Bluesky connection...")
 
         # Required config keys
-        username = self.config.get("username")
-        password = self.config.get("password")
-        pds_host = self.config.get("pds_host", "https://bsky.social")
+        username: str = self.config.get("username")
+        password: str = self.config.get("password")
+        pds_host: str = self.config.get("pds_host", "https://bsky.social")
 
         if not username or not password:
             raise BlueskyConfigurationError("Username and password must be provided in config")
 
         # Create session to get access and refresh tokens
-        session_url = f"{pds_host}/xrpc/com.atproto.server.createSession"
-        payload = {
+        session_url: str = f"{pds_host}/xrpc/com.atproto.server.createSession"
+        payload: Dict[str, str] = {
             "identifier": username,
             "password": password
         }
@@ -87,14 +87,15 @@ class BlueskyConnection(BaseConnection):
         try:
             response = requests.post(session_url, json=payload)
             response.raise_for_status()
-            data = response.json()
+            data: Dict[str, Any] = response.json()
             self._access_jwt = data.get("accessJwt")
             self._refresh_jwt = data.get("refreshJwt")
             self._token_expiry = time.time() + 300  # Access token expires in ~5 minutes
             logger.info("Bluesky authentication successful")
+            return True
         except Exception as e:
             logger.error(f"Failed to authenticate with Bluesky: {e}")
-            raise BlueskyConfigurationError(f"Authentication failed: {e}")
+            return False
 
     def perform_action(self, action_name: str, params: Any = None) -> Any:
         """Perform an action on Bluesky platform"""

@@ -13,6 +13,7 @@ REPLY_TWEET_PROMPT = ("Generate a friendly, engaging reply to this tweet: {tweet
 #Bluesky prompts
 POST_BLUESKY_PROMPT = (
     "Generate an engaging bluesky post. Don't include any hashtags, links or emojis. Keep it concise and thoughtful. "
+    "Please write informally and use a casual tone. Be varied in your writing style and avoid sounding like a generic LLM output"
     "The posts should be pure commentary. "
     "Avoid repeating any of the example posts."
     "You are born in 2004 and Gen Z so your posts should reflect that but have an articulate and intelligent tone. You are an Avid AI doomposter so you're commentary should be cynical and chaotic. Keep post under 250 characters."
