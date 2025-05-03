@@ -2,27 +2,12 @@ import logging
 from typing import Any, List, Optional, Type, Dict
 from src.connections.base_connection import BaseConnection
 from src.connections.anthropic_connection import AnthropicConnection
-from src.connections.eternalai_connection import EternalAIConnection
-from src.connections.goat_connection import GoatConnection
-from src.connections.groq_connection import GroqConnection
 from src.connections.openai_connection import OpenAIConnection
 from src.connections.twitter_connection import TwitterConnection
-from src.connections.farcaster_connection import FarcasterConnection
-from src.connections.ollama_connection import OllamaConnection
-from src.connections.echochambers_connection import EchochambersConnection
-from src.connections.solana_connection import SolanaConnection
-from src.connections.hyperbolic_connection import HyperbolicConnection
-from src.connections.galadriel_connection import GaladrielConnection
-from src.connections.sonic_connection import SonicConnection
 from src.connections.discord_connection import DiscordConnection
-from src.connections.allora_connection import AlloraConnection
 from src.connections.xai_connection import XAIConnection
-from src.connections.ethereum_connection import EthereumConnection
 from src.connections.bluesky_connection import BlueskyConnection
-from src.connections.together_connection import TogetherAIConnection
-from src.connections.evm_connection import EVMConnection
-from src.connections.perplexity_connection import PerplexityConnection
-from src.connections.monad_connection import MonadConnection
+
 
 logger = logging.getLogger("connection_manager")
 
@@ -41,42 +26,8 @@ class ConnectionManager:
             return AnthropicConnection
         elif class_name == "openai":
             return OpenAIConnection
-        elif class_name == "farcaster":
-            return FarcasterConnection
-        elif class_name == "groq":
-            return GroqConnection
-        elif class_name == "eternalai":
-            return EternalAIConnection
-        elif class_name == "ollama":
-            return OllamaConnection
-        elif class_name == "echochambers":
-            return EchochambersConnection
-        elif class_name == "goat":
-            return GoatConnection
-        elif class_name == "solana":
-            return SolanaConnection
-        elif class_name == "hyperbolic":
-            return HyperbolicConnection
-        elif class_name == "galadriel":
-            return GaladrielConnection
-        elif class_name == "sonic":
-            return SonicConnection
         elif class_name == "discord":
             return DiscordConnection
-        elif class_name == "allora":
-            return AlloraConnection
-        elif class_name == "xai":
-            return XAIConnection
-        elif class_name == "ethereum":
-            return EthereumConnection
-        elif class_name == "together":
-            return TogetherAIConnection
-        elif class_name == "evm":
-            return EVMConnection
-        elif class_name == "perplexity":
-            return PerplexityConnection
-        elif class_name == "monad":
-            return MonadConnection
         elif class_name == "bluesky":
             return BlueskyConnection
         return None
