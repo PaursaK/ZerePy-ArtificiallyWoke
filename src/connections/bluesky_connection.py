@@ -1,5 +1,7 @@
 import logging
 from typing import Dict, Any
+from src.actions import bluesky_actions
+import datetime
 from src.connections.base_connection import BaseConnection, Action, ActionParameter
 
 logger = logging.getLogger("connections.bluesky_connection")
@@ -51,8 +53,8 @@ class BlueskyConnection(BaseConnection):
     def register_actions(self) -> None:
         """Register available Bluesky actions"""
         self.actions = {
-            "post": Action(
-                name="post",
+            "post-bluesky": Action(
+                name="post-bluesky",
                 parameters=[
                     ActionParameter("text", True, str, "Text content of the post")
                 ],
@@ -115,7 +117,7 @@ class BlueskyConnection(BaseConnection):
 
         pds_host = self.config.get("pds_host", "https://bsky.social")
 
-        if action_name == "post":
+        if action_name == "post" or action_name == "post-bluesky":
             text = params.get("text") if params else None
             if not text:
                 raise BlueskyAPIError("Missing 'text' parameter for post action")
@@ -136,8 +138,12 @@ class BlueskyConnection(BaseConnection):
                 response.raise_for_status()
                 return response.json()
             except Exception as e:
-                logger.error(f"Failed to create post: {e}")
-                raise BlueskyAPIError(f"Post creation failed: {e}")
+                try:
+                    error_content = e.response.text if hasattr(e, 'response') else str(e)
+                except Exception:
+                    error_content = str(e)
+                logger.error(f"Failed to create post: {error_content}")
+                raise BlueskyAPIError(f"Post creation failed: {error_content}")
 
         else:
             logger.error(f"Unknown action '{action_name}'")
